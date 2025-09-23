@@ -322,12 +322,8 @@
           <input type="text" id="fullName" placeholder="مثلاً: علی رضایی 😊" />
         </div>
         <div class="form-group">
-          <label>آیدی تلگرام برای ارتباط (الزامی):</label>
-          <input type="text" id="telegramContact" placeholder="@your_id" required />
-        </div>
-        <div class="form-group">
-          <label>آیدی تلگرام برای دریافت اطلاعات دامنه (الزامی):</label>
-          <input type="text" id="telegramDomainInfo" placeholder="@your_dns_id" required />
+          <label>آیدی تلگرام برای ارتباط و دریافت اطلاعات دامنه (الزامی):</label>
+          <input type="text" id="telegramId" placeholder="@your_id" required />
         </div>
         <div class="form-group">
           <label>نوع سفارش:</label>
@@ -359,8 +355,8 @@
       <div class="card">
         <h3>👀 اطلاعات دامنه خود را ببین!</h3>
         <div class="form-group">
-          <label>آیدی تلگرام اطلاعات دامنه:</label>
-          <input type="text" id="viewTelegram" placeholder="@your_dns_id" />
+          <label>آیدی تلگرام:</label>
+          <input type="text" id="viewTelegram" placeholder="@your_id" />
         </div>
         <button id="viewBtn" class="btn-primary">نمایش اطلاعات 📋</button>
       </div>
@@ -394,8 +390,7 @@
           <thead>
             <tr>
               <th>نام 😊</th>
-              <th>تماس 📩</th>
-              <th>اطلاعات 📋</th>
+              <th>آیدی تلگرام 📩</th>
               <th>نوع 💎</th>
               <th>دامنه 🌐</th>
               <th>وضعیت</th>
@@ -427,7 +422,7 @@
     const db = firebase.firestore();
 
     const DOMAIN_CHECKER_URL = "https://your-domain-checker.com/?q=";
-    const ADMIN_PASSWORD = "admin123";
+    const ADMIN_PASSWORD = "Nox23@23483&$¥₩Qwxesjs";
 
     // ========== تب‌ها ==========
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -444,11 +439,10 @@
       e.preventDefault();
       
       let fullName = document.getElementById('fullName').value.trim();
-      const telegramContact = document.getElementById('telegramContact').value.trim();
-      const telegramDomainInfo = document.getElementById('telegramDomainInfo').value.trim();
+      const telegramId = document.getElementById('telegramId').value.trim();
       const orderType = document.querySelector('input[name="orderType"]:checked').value;
 
-      if (!telegramContact.startsWith('@') || !telegramDomainInfo.startsWith('@')) {
+      if (!telegramId.startsWith('@')) {
         alert("لطفاً آیدی تلگرام رو با @ شروع کنید! مثلاً: @your_id");
         return;
       }
@@ -461,8 +455,7 @@
 
       const order = {
         fullName,
-        telegramContact,
-        telegramDomainInfo,
+        telegramId,
         orderType,
         domain: "",
         isActive: false,
@@ -490,7 +483,7 @@
       }
 
       try {
-        const snapshot = await db.collection("orders").where("telegramDomainInfo", "==", telegram).get();
+        const snapshot = await db.collection("orders").where("telegramId", "==", telegram).get();
         const resultDiv = document.getElementById('viewResult');
         
         if (snapshot.empty) {
@@ -558,15 +551,15 @@
           const statusText = o.isActive ? "✅ فعال" : "❌ غیرفعال";
           const statusClass = o.isActive ? "status-active" : "status-inactive";
 
-          // تبدیل آیدی به لینک تلگرام (بدون @)
-          const contactLink = o.telegramContact.replace('@', '');
-          const infoLink = o.telegramDomainInfo.replace('@', '');
+          // حذف @ فقط برای ساخت لینک
+          const telegramLink = o.telegramId.startsWith('@') 
+            ? o.telegramId.substring(1) 
+            : o.telegramId;
 
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${o.fullName}</td>
-            <td data-label="تماس"><a href="https://t.me/${contactLink}" target="_blank" class="telegram-link">${o.telegramContact}</a></td>
-            <td data-label="اطلاعات"><a href="https://t.me/${infoLink}" target="_blank" class="telegram-link">${o.telegramDomainInfo}</a></td>
+            <td data-label="آیدی"><a href="https://t.me/${telegramLink}" target="_blank" class="telegram-link">${o.telegramId}</a></td>
             <td data-label="نوع">${o.orderType === 'vip' ? '💎 VIP' : '📦 ساده'}</td>
             <td data-label="دامنه">
               <input type="text" 
