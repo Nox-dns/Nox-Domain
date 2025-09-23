@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ فروشگاه دامنه | ثبت سفارش آسان!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ فروشگاه دامنه ما</h1>
+      <p>ثبت سفارش آسان • پشتیبانی سریع • تحویل حرفه‌ای!</p>
+      <a href="https://t.me/Wolfnox69" target="_blank" class="support-link">🛟 پشتیبانی تلگرام</a>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="order">📩 ثبت سفارش</button>
+      <button class="tab-btn" data-tab="view">👀 مشاهده اطلاعات</button>
+      <button class="tab-btn" data-tab="checker">🔍 چک کننده دامنه</button>
+      <button class="tab-btn" data-tab="admin">🔒 پنل ادمین</button>
+    </div>
+
+    <!-- بخش ثبت سفارش -->
+    <div id="order" class="tab-content active">
+      <form id="orderForm">
+        <div class="form-group">
+          <label>نام و نام خانوادگی (اختیاری):</label>
+          <input type="text" id="fullName" placeholder="مثلاً: علی رضایی 😊" />
+        </div>
+        <div class="form-group">
+          <label>آیدی تلگرام برای ارتباط و دریافت اطلاعات دامنه (الزامی):</label>
+          <input type="text" id="telegramId" placeholder="@your_id" required />
+        </div>
+        <div class="form-group">
+          <label>نوع سفارش:</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="simple" name="orderType" value="simple" checked />
+              <label for="simple">ساده 📦</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="vip" name="orderType" value="vip" />
+              <label for="vip" style="color: var(--accent);">VIP 💎</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>توضیحات سفارش (اختیاری):</label>
+          <textarea id="description" placeholder="توضیحات بیشتر درباره سفارش..."></textarea>
+        </div>
+        <div class="alert">
+          🙏 <strong>کاربر عزیز!</strong><br>
+          لطفاً تا زمانی که ادمین باهات تماس بگیره، <strong>آیدی تلگرامت رو تغییر نده</strong>!<br>
+          ❗ اگر آیدی‌ات رو عوض کنی و طی <strong>۳ روز</strong> به پیام ما جواب ندی، سفارشت از سیستم پاک می‌شه.<br>
+          🔑 <strong>پس آیدی‌ات رو حفظ کن!</strong> در غیر این صورت، حتی نمی‌تونی اطلاعات دامنه‌ات رو ببینی 😢
+        </div>
+        <button type="submit" class="btn-primary">ثبت سفارش الان! 🚀</button>
+      </form>
+      <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- بخش مشاهده اطلاعات -->
+    <div id="view" class="tab-content">
+      <div class="card">
+        <h3>👀 اطلاعات دامنه خود را ببین!</h3>
+        <div class="form-group">
+          <label>آیدی تلگرام:</label>
+          <input type="text" id="viewTelegram" placeholder="@your_id" />
+        </div>
+        <button id="viewBtn" class="btn-primary">نمایش اطلاعات 📋</button>
+      </div>
+      <div id="viewResult"></div>
+      <div id="spinner" class="spinner" style="display:none;"></div>
+    </div>
+
+    <!-- بخش چک کننده دامنه -->
+    <div id="checker" class="tab-content">
+      <div class="domain-checker">
+        <h3>🔍 چک کننده دامنه مستقل</h3>
+        <p>هر دامنه‌ای رو وارد کن — وضعیتش رو برات چک می‌کنیم! 🌐</p>
+        <input type="text" id="externalDomain" placeholder="example.com" />
+        <button id="checkBtn" class="btn-primary">چک کن! 🔎</button>
+        <p style="margin-top: 15px; color: var(--text-light);">
+          این ابزار برای همه آزاده! نیازی به ثبت سفارش نیست. 😎
+        </p>
+      </div>
+    </div>
+
+    <!-- بخش ادمین -->
+    <div id="admin" class="tab-content">
+      <div class="card">
+        <h3>🔒 ورود به پنل ادمین</h3>
+        <input type="password" id="adminPass" placeholder="رمز ادمین" style="margin: 15px 0; width: 100%; padding: 12px; border-radius: 10px;" />
+        <button id="adminLogin" class="btn-primary">ورود 🔑</button>
+      </div>
+      <div id="adminPanel" style="display:none;">
+        <h3>📋 لیست سفارش‌ها</h3>
+        <div id="adminLoading" class="spinner" style="display:none;"></div>
+        <table id="ordersTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>نام 😊</th>
+              <th>آیدی تلگرام 📩</th>
+              <th>نوع 💎</th>
+              <th>دامنه 🌐</th>
+              <th>توضیحات 📝</th>
+              <th>وضعیت</th>
+              <th>عملیات ⚙️</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <p>طراحی شده با ❤️ برای کاربرای خفن مثل تو!<br>پشتیبانی: <a href="https://t.me/Wolfnox69" target="_blank">@Wolfnox69</a> 🛟</p>
+    </footer>
+  </div>
+  <!-- Firebase -->
+  <!-- فقط بعداً مقدارهای واقعی پروژه‌ات را جایگزین کن -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
