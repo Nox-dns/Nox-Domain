@@ -3,145 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دامنه نکس | Twitch Style Emojis</title>
+  <title>انتخاب حالت روحیه‌بخش</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- نوار بالا -->
-  <nav class="topbar">
-    <span class="logo">Nox</span>
-    <div class="top-actions">
-      <button class="btn signup">🔵 عضویت</button>
-      <button class="btn open-app">🟠 اپلیکیشن</button>
+  <div class="container">
+    <div class="icon-menu">
+      <div id="edit" class="icon-item selected">
+        <span class="icon-emoji">✎</span>
+        <div class="icon-title">ویرایش</div>
+        <div class="icon-desc">هر روز فرصتی تازه برای نوشتن داستانت است.</div>
+      </div>
+      <div id="down" class="icon-item">
+        <span class="icon-emoji">☟</span>
+        <div class="icon-title">پایین</div>
+        <div class="icon-desc">گاهی برای اوج گرفتن، باید از پایین شروع کنیم.</div>
+      </div>
+      <div id="right" class="icon-item">
+        <span class="icon-emoji">☛</span>
+        <div class="icon-title">راست</div>
+        <div class="icon-desc">راه درست همیشه روشن است، فقط کافیست انتخابش کنیم.</div>
+      </div>
+      <div id="left" class="icon-item">
+        <span class="icon-emoji">☜</span>
+        <div class="icon-title">چپ</div>
+        <div class="icon-desc">شجاعت یعنی گاهی مسیر متفاوت را برگزینیم.</div>
+      </div>
+      <div id="up" class="icon-item">
+        <span class="icon-emoji">☞</span>
+        <div class="icon-title">بالا</div>
+        <div class="icon-desc">به سوی هدف‌هایت پرواز کن، سقف آرزوهایت بالا ببر.</div>
+      </div>
+      <div id="back" class="icon-item">
+        <span class="icon-emoji">☚</span>
+        <div class="icon-title">بازگشت</div>
+        <div class="icon-desc">گاهی برگشتن یعنی دوباره یافتن خودت.</div>
+      </div>
+      <div id="star" class="icon-item">
+        <span class="icon-emoji">✵</span>
+        <div class="icon-title">ستاره</div>
+        <div class="icon-desc">تو همان ستاره‌ای هستی که شب را روشن می‌کند.</div>
+      </div>
+      <div id="crown" class="icon-item">
+        <span class="icon-emoji">♔</span>
+        <div class="icon-title">تاج</div>
+        <div class="icon-desc">شکوه تو در انتخاب‌هایت نمایان می‌شود.</div>
+      </div>
     </div>
-  </nav>
-  
-  <!-- تب‌ها -->
-  <div class="tabs">
-    <span class="tab active" data-tab="order">📩 سفارش</span>
-    <span class="tab" data-tab="live">🔴 لایوها</span>
-    <span class="tab" data-tab="categories">🗂️ دسته‌ها</span>
-    <span class="tab" data-tab="admin">🔒 ادمین</span>
-  </div>
-
-  <!-- سفارش دامنه -->
-  <div id="order" class="tab-content active">
-    <div class="section-title">📝 فرم سفارش دامنه</div>
-    <form id="orderForm">
+    <form id="stateForm" class="order-form">
       <div class="form-group">
-        <label>👤 نام و نام خانوادگی (اختیاری):</label>
-        <input type="text" id="fullName" placeholder="مثلاً: علی رضایی 😊" />
+        <label for="description">📝 توضیحات:</label>
+        <textarea id="description" placeholder="توضیحات بیشتر..." required></textarea>
       </div>
-      <div class="form-group">
-        <label>💬 آیدی تلگرام (اجباری):</label>
-        <input type="text" id="telegramId" placeholder="@your_id" required />
-      </div>
-      <div class="form-group">
-        <label>نوع سفارش:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="orderType" value="simple" checked /> 📦 ساده</label>
-          <label><input type="radio" name="orderType" value="vip" /> 💎 VIP</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>📝 توضیحات سفارش:</label>
-        <textarea id="description" placeholder="توضیحات بیشتر..."></textarea>
-      </div>
-      <button type="submit" class="btn-primary">🚀 ثبت سفارش</button>
+      <button type="submit" class="btn-primary">🚀 ثبت حالت</button>
     </form>
     <div id="toast" class="toast"></div>
   </div>
-
-  <!-- لایوها -->
-  <div id="live" class="tab-content">
-    <div class="section-title">🔴 لایوهای دامنه</div>
-    <div class="live-cards">
-      <div class="live-card">
-        <img src="live1.jpg" alt="Live" class="live-img" />
-        <span class="live-label">🔴 LIVE</span>
-        <div class="live-info">
-          <span class="views">👁️ 102.3K بازدید</span>
-          <div class="title">نمونه لایو اول</div>
-          <div class="tags">
-            <span class="tag blue">💬 چت</span>
-            <span class="tag orange">📦 ساده</span>
-          </div>
-        </div>
-      </div>
-      <div class="live-card">
-        <img src="live2.jpg" alt="Live" class="live-img" />
-        <span class="live-label">🔴 LIVE</span>
-        <div class="live-info">
-          <span class="views">👁️ 41.8K بازدید</span>
-          <div class="title">نمونه لایو دوم</div>
-          <div class="tags">
-            <span class="tag blue">💎 VIP</span>
-            <span class="tag orange">🌐 دامنه</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- دسته‌بندی‌ها -->
-  <div id="categories" class="tab-content">
-    <div class="section-title">🗂️ دسته‌بندی‌های پیشنهادی</div>
-    <div class="categories">
-      <div class="category-card">
-        <img src="cat-chat.jpg" alt="Category" />
-        <div class="cat-title">💬 چت</div>
-        <span class="cat-views">👁️ 527.4K بازدید</span>
-        <div class="tags"><span class="tag blue">🧑‍🤝‍🧑 IRL</span></div>
-      </div>
-      <div class="category-card">
-        <img src="cat-fortnite.jpg" alt="Category" />
-        <div class="cat-title">🎮 فورتنایت</div>
-        <span class="cat-views">👁️ 77.6K بازدید</span>
-        <div class="tags"><span class="tag blue">🎯 FPS</span><span class="tag orange">🔫 Shooter</span></div>
-      </div>
-      <div class="category-card">
-        <img src="cat-irl.jpg" alt="Category" />
-        <div class="cat-title">🧑‍🤝‍🧑 IRL</div>
-        <span class="cat-views">👁️ 81.7K بازدید</span>
-        <div class="tags"><span class="tag blue">🧑‍🤝‍🧑 IRL</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- پنل ادمین -->
-  <div id="admin" class="tab-content">
-    <div class="section-title">🔒 ورود به پنل ادمین</div>
-    <form id="adminLoginForm">
-      <input type="password" id="adminPass" placeholder="رمز ادمین 🔑" />
-      <button type="submit" class="btn-primary">ورود</button>
-    </form>
-    <div id="adminPanel" style="display:none;">
-      <div class="section-title">📋 لیست سفارش‌ها</div>
-      <table class="ordersTable">
-        <thead>
-          <tr>
-            <th>👤 نام</th>
-            <th>💬 آیدی تلگرام</th>
-            <th>نوع</th>
-            <th>🌐 دامنه</th>
-            <th>📝 توضیحات</th>
-            <th>وضعیت</th>
-            <th>⚙️ عملیات</th>
-          </tr>
-        </thead>
-        <tbody id="ordersBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- منوی پایین -->
-  <nav class="bottombar">
-    <a href="#" class="bottom-item active"><span class="emoji">🏠</span><span>خانه</span></a>
-    <a href="#" class="bottom-item"><span class="emoji">🔎</span><span>جستجو</span></a>
-    <a href="#" class="bottom-item"><span class="emoji">🔔</span><span>فعالیت</span></a>
-    <a href="#" class="bottom-item"><span class="emoji">👤</span><span>پروفایل</span></a>
-  </nav>
-
   <script src="main.js"></script>
 </body>
-                                                               </html>
+</html>
