@@ -3,61 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>انتخاب حالت روحیه‌بخش</title>
+  <title>سفارش دامنه | Nox Domain</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <div class="icon-menu">
-      <div id="edit" class="icon-item selected">
-        <span class="icon-emoji">✎</span>
-        <div class="icon-title">ویرایش</div>
-        <div class="icon-desc">هر روز فرصتی تازه برای نوشتن داستانت است.</div>
+    <header class="header">
+      <div class="logo-box">
+        <span class="logo">NoxDomain</span>
+        <span class="logo-accent">.IR</span>
       </div>
-      <div id="down" class="icon-item">
-        <span class="icon-emoji">☟</span>
-        <div class="icon-title">پایین</div>
-        <div class="icon-desc">گاهی برای اوج گرفتن، باید از پایین شروع کنیم.</div>
+      <div class="slogan">پلتفرم ثبت دامنه سریع و حرفه‌ای</div>
+    </header>
+    <main>
+      <section class="order-card">
+        <div class="section-title"><span class="icon">🌐</span> ثبت سفارش دامنه</div>
+        <form id="orderForm">
+          <div class="select-types">
+            <div id="simple" class="type-option selected" tabindex="0">
+              <span class="type-icon">📦</span>
+              <span class="type-title">ساده</span>
+              <span class="type-desc">بدون امکانات اضافی، تحویل سریع</span>
+            </div>
+            <div id="vip" class="type-option" tabindex="0">
+              <span class="type-icon">💎</span>
+              <span class="type-title">VIP</span>
+              <span class="type-desc">امکانات ویژه و پشتیبانی اختصاصی</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="telegramId">آیدی تلگرام برای ارتباط:</label>
+            <input type="text" id="telegramId" placeholder="مثلاً: @yourid" required>
+          </div>
+          <div class="form-group">
+            <label for="description">توضیحات سفارش:</label>
+            <textarea id="description" placeholder="مثلاً نوع دامنه یا نیاز خاص..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">ثبت سفارش 🚀</button>
+        </form>
+        <div id="toast" class="toast"></div>
+      </section>
+      <section class="info-card">
+        <div class="info-title">چرا NoxDomain؟</div>
+        <ul class="info-list">
+          <li>⏱️ ثبت و تحویل دامنه در کمترین زمان</li>
+          <li>🛟 پشتیبانی سریع و حرفه‌ای</li>
+          <li>🔒 امنیت اطلاعات و پرداخت</li>
+          <li>🌟 امکان سفارش VIP با خدمات ویژه</li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-main">
+        <span>ساخته شده با ❤️ توسط Nox-dns</span>
+        <a class="footer-link" href="https://t.me/Nox-dns" target="_blank">ارتباط با پشتیبانی</a>
       </div>
-      <div id="right" class="icon-item">
-        <span class="icon-emoji">☛</span>
-        <div class="icon-title">راست</div>
-        <div class="icon-desc">راه درست همیشه روشن است، فقط کافیست انتخابش کنیم.</div>
-      </div>
-      <div id="left" class="icon-item">
-        <span class="icon-emoji">☜</span>
-        <div class="icon-title">چپ</div>
-        <div class="icon-desc">شجاعت یعنی گاهی مسیر متفاوت را برگزینیم.</div>
-      </div>
-      <div id="up" class="icon-item">
-        <span class="icon-emoji">☞</span>
-        <div class="icon-title">بالا</div>
-        <div class="icon-desc">به سوی هدف‌هایت پرواز کن، سقف آرزوهایت بالا ببر.</div>
-      </div>
-      <div id="back" class="icon-item">
-        <span class="icon-emoji">☚</span>
-        <div class="icon-title">بازگشت</div>
-        <div class="icon-desc">گاهی برگشتن یعنی دوباره یافتن خودت.</div>
-      </div>
-      <div id="star" class="icon-item">
-        <span class="icon-emoji">✵</span>
-        <div class="icon-title">ستاره</div>
-        <div class="icon-desc">تو همان ستاره‌ای هستی که شب را روشن می‌کند.</div>
-      </div>
-      <div id="crown" class="icon-item">
-        <span class="icon-emoji">♔</span>
-        <div class="icon-title">تاج</div>
-        <div class="icon-desc">شکوه تو در انتخاب‌هایت نمایان می‌شود.</div>
-      </div>
-    </div>
-    <form id="stateForm" class="order-form">
-      <div class="form-group">
-        <label for="description">📝 توضیحات:</label>
-        <textarea id="description" placeholder="توضیحات بیشتر..." required></textarea>
-      </div>
-      <button type="submit" class="btn-primary">🚀 ثبت حالت</button>
-    </form>
-    <div id="toast" class="toast"></div>
+    </footer>
   </div>
   <script src="main.js"></script>
 </body>
