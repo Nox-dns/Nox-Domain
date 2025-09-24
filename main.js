@@ -1,12 +1,21 @@
-// انتخاب آیکون برجسته و نمایش حالت انتخاب‌شده
-const icons = document.querySelectorAll('.icon-item');
-let selectedType = document.querySelector('.icon-item.selected')?.id || "edit";
+// انتخاب نوع سفارش
+const simpleOption = document.getElementById('simple');
+const vipOption = document.getElementById('vip');
+let selectedType = "simple";
 
-icons.forEach(opt => {
+[simpleOption, vipOption].forEach(opt => {
   opt.addEventListener('click', () => {
-    icons.forEach(i => i.classList.remove('selected'));
+    // رفع برجستگی از همه
+    simpleOption.classList.remove('selected');
+    vipOption.classList.remove('selected');
+    // اضافه کردن برجستگی به انتخاب‌شده
     opt.classList.add('selected');
     selectedType = opt.id;
+  });
+  opt.addEventListener('keydown', (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      opt.click();
+    }
   });
 });
 
@@ -18,15 +27,22 @@ function showToast(msg) {
   setTimeout(() => toast.className = "toast", 2800);
 }
 
-// ثبت حالت دمو
-document.getElementById('stateForm').addEventListener('submit', function(e) {
+// ثبت سفارش دمو
+document.getElementById('orderForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const telegramId = document.getElementById('telegramId').value.trim();
   const desc = document.getElementById('description').value.trim();
-  if (!desc) {
-    showToast('لطفاً توضیحات را وارد کنید.');
+  if (!telegramId.match(/^@[a-zA-Z0-9_]{5,}$/)) {
+    showToast('آیدی تلگرام معتبر وارد کنید (با @ و حداقل ۵ حرف)');
     return;
   }
-  let title = document.getElementById(selectedType).querySelector('.icon-title').innerText;
-  showToast(`✅ حالت "${title}" با توضیحات ثبت شد.`);
-  document.getElementById('description').value = "";
+  if (!desc) {
+    showToast('لطفاً توضیحات سفارش را وارد کنید.');
+    return;
+  }
+  showToast(`✅ سفارش "${selectedType === "simple" ? "ساده" : "VIP"}" با موفقیت ثبت شد.`);
+  this.reset();
+  simpleOption.classList.add('selected');
+  vipOption.classList.remove('selected');
+  selectedType = "simple";
 });
