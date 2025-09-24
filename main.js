@@ -1,57 +1,31 @@
-// ----- تب‌بندی -----
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+// تب‌بندی سایت با ایموجی
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.add('active');
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
   });
 });
 
-// ----- Toast -----
-function showToast(msg, type = "error") {
+// Toast پیام
+function showToast(msg) {
   const toast = document.getElementById("toast");
   toast.innerText = msg;
-  toast.className = "toast show " + type;
-  setTimeout(() => toast.className = "toast", 3500);
+  toast.className = "toast show";
+  setTimeout(() => toast.className = "toast", 3000);
 }
 
-// ----- Spinner -----
-function showSpinner(id, show=true) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.style.display = show ? "block" : "none";
-}
-
-// ----- اعتبارسنجی تلگرام -----
-function validateTelegramId(id) {
-  return /^@[a-zA-Z0-9_]{5,}$/.test(id);
-}
-
-// ----- ثبت سفارش (غیرفعال تا راه‌اندازی Firebase) -----
-// document.getElementById('orderForm').addEventListener('submit', async (e) => {
-//   e.preventDefault();
-//   // کدهای ثبت سفارش و اتصال به Firebase را بعداً اضافه کن
-//   showToast("فعلاً ثبت سفارش فعال نیست. بعداً راه‌اندازی می‌شود.", "error");
-// });
-
-// ----- مشاهده اطلاعات دامنه (غیرفعال تا راه‌اندازی Firebase) -----
-// document.getElementById('viewBtn').addEventListener('click', async () => {
-//   showToast("فعلاً این بخش فعال نیست. بعداً راه‌اندازی می‌شود.", "error");
-// });
-
-// ----- چک کننده دامنه (لینک بعداً اضافه می‌شود) -----
-document.getElementById('checkBtn').addEventListener('click', () => {
-  const domain = document.getElementById('externalDomain').value.trim();
-  if (!domain) {
-    showToast("نام دامنه را وارد کن!", "error");
-    return;
-  }
-  // window.open(DOMAIN_CHECKER_URL + encodeURIComponent(domain), '_blank');
-  showToast("لینک چک کننده دامنه بعداً اضافه می‌شود.", "error");
+// دمو برای فرم سفارش (در صورت نیاز به اتصال فایربیس، کد مربوطه را جایگزین کن)
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  showToast("✅ سفارش شما ثبت شد!");
+  this.reset();
 });
 
-// ----- ورود ادمین (غیرفعال تا راه‌اندازی Firebase) -----
-// document.getElementById('adminLogin').addEventListener('click', () => {
-//   showToast("پنل ادمین بعداً فعال می‌شود.", "error");
-// });
+// دمو ورود ادمین (در صورت نیاز به اتصال فایربیس، کد مربوطه را جایگزین کن)
+document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('adminPanel').style.display = 'block';
+  showToast("🔒 وارد پنل شدید!");
+});
